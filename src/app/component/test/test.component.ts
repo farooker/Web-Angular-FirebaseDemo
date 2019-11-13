@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { element } from 'protractor';
+import { ApiTodoService} from '../../service/api-todo.service'
+import { from } from 'rxjs';
 
 
 
@@ -20,9 +22,9 @@ export class TestComponent implements OnInit {
         province:string,
         postcode:string
       } 
-
+  private LoadApiTodo : Model_Apitodo[];
   private skills:string[]; //ตัวแปร แบบ array
-
+  constructor(private ApiService:ApiTodoService){}
   ngOnInit() {
     this.name ="Panuwat Code Dev";
     this.age =24;
@@ -37,6 +39,9 @@ export class TestComponent implements OnInit {
     }
     this.skills=["PHP","C#","JS","JAVA","Html"];
      // call service APi
+    this.ApiService.LoadApiTodo().subscribe((res)=>{
+       this.LoadApiTodo = res;
+    });
 
   }
   addSkill(skill)
@@ -54,6 +59,11 @@ export class TestComponent implements OnInit {
     });
   }
 }
-
+interface Model_Apitodo {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
 
 

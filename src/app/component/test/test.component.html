@@ -43,3 +43,10 @@
         <input type="text"[(ngModel)]="email" name="email">
     </div>
 </form>
+
+<h2>Api json </h2>
+<uL>
+    <li *ngFor="let ApiTodo of LoadApiTodo;let i =index">
+        {{i}}.... {{ApiTodo.completed}} 
+    </li>
+</uL>
